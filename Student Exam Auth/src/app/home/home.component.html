@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <h3 class="float-right">{{date | date: "fullDate"}}</h3>
+  <h3 class="mb-4">Exams for Today</h3>
+
+  <div class="mt-4" *ngIf="exam.length > 0">
+    <table mdbTable>
+      <thead class="white-text" style="background-color: #33b5e5">
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let el of exam">
+          <td>{{el.cc}}</td>
+          <td>{{el.sn}}</td>
+          <td>{{el.sc}}</td>
+          <td>{{el.s}}</td>
+          <td>{{el.b}}</td>
+          <td>{{el.r}}</td>
+          <td>{{el.rw}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-4" *ngIf="exam.length == 0">
+    <h4 class="text-danger">No Exam details for today!</h4>
+  </div>
+
+</div>

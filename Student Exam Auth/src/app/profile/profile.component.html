@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <p class="h2 mt-5 font-weight-light text-center">Personal Details</p>
+  <div class="row mt-5" *ngIf="!edit">
+    <div class="col-3">
+      <img src="{{pic}}" class="w-100" (click)="fileinput.click()">
+    </div>
+    <div class="col-3">
+      <strong>
+        Student Number: <br /> Name: <br /> Surname: <br />
+        E-mail: <br />Contact:<br />
+        User type: <br />
+        <span *ngIf="user.dateOfBirth">Date of birth:</span>
+      </strong>
+    </div>
+    <div class="col-3">
+      {{user.id}}
+      <br />
+      {{user.name}}
+      <br />
+      {{user.surname}}
+      <br />
+      {{user.email}}
+      <br />
+      {{user.contact}}
+      <br />
+      {{user.role}} <br /> <span *ngIf="user.dateOfBirth">{{user.dateOfBirth}}</span> <br />
+    </div>
+    <div class="col-3">
+      <button type="button" class="btn btn-info" (click)="editProfile()">
+        Edit Profile
+      </button>
+    </div>
+  </div>
+  <form class="text-center border border-light p-5 mt-5" [formGroup]="usr" (submit)="update()" *ngIf="edit">
+    <p class="h2 mb-4">Update Your Profile</p> <input type="text" class="form-control mb-4" placeholder="Name"
+      formControlName="name" value="{{user.name}}" pattern="[A-Za-z]+" minlength="3" required />
+    <input type="text" class="form-control mb-4" placeholder="Surname" formControlName="surname"
+      value="{{user.surname}}" pattern="[A-Za-z]+" minlength="3" required />
+    <input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email" value="{{user.email}}"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+    <input type="text" class="form-control mb-4" placeholder="Contact" formControlName="contact"
+      value="{{user.contact}}" pattern="[0-9]+" maxlength="10" minlength="10" required />
+    <input *ngIf="!user.dateOfBirth" type="date" class="form-control mb-4" placeholder="Date of Birth" max="{{maxDate}}"
+      formControlName="dateOfBirth" required />
+    <p class="text-danger" *ngIf="!user.dateOfBirth">*Once date of birth is added it can not be change!</p>
+    <button class="btn btn-info btn-block my-4" type="submit">Update</button>
+  </form>
+</div>
+
+<input type="file" (change)="uploadFile($event)" style="display:none" accept="image/png, image/jpeg" #fileinput>

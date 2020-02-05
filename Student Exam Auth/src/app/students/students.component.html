@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<p class="h2 mt-5 font-weight-light text-center">Users</p>
+<div class="container my-5" *ngIf="!edit && !add && !addSubj">
+  <!-- <button type="button" class="btn btn-success mb-4" (click)="addUser()">Add a User</button> -->
+  <table mdbTable>
+    <thead class="white-text" style="background-color: #33b5e5">
+      <tr>
+        <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let el of users; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{el.id}}</td>
+        <td>{{el.name}}</td>
+        <td>{{el.surname}}</td>
+        <td>{{el.email}}</td>
+        <td>{{el.regDate}}</td>
+        <td>{{el.role}}</td>
+        <td class="text-center" *ngIf="el.active">
+          <mdb-icon fas icon="plus" size="2x" (click)="addSub(el)"></mdb-icon>
+        </td>
+        <td *ngIf="!el.active"> </td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="showForm(el)">Edit</button>
+        </td>
+        <td *ngIf="el.active">
+          <button type="button" class="btn btn-danger" (click)="delete(el)"> Deactivate User</button>
+        </td>
+        <td *ngIf="!el.active">
+          <button type="button" class="btn btn-success" (click)="delete(el)">Activate User</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h5>Total users: {{users.length}}</h5>
+  <div class="my-5 center">
+    <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadCSV(users)">Export to CSV</button>
+    <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadTXT(users)">Export to Text
+        file</button>
+    <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadDOC(users)">Export to Word</button>
+    <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadPDF(users)">Export to PDF</button>
+</div>
+</div>
+<div class="container my-5">
+  <form class="text-center" [formGroup]="user" (submit)="update()" *ngIf="edit && !add && !addSubj">
+    <p class="h2 mb-4">Update {{tempUser.name}}</p>
+    <input type="text" class="form-control mb-4" placeholder="Name" formControlName="name" value="{{tempUser.name}}"
+      required />
+    <input type="text" class="form-control mb-4" placeholder="Surname" formControlName="surname"
+      value="{{tempUser.surname}}" required />
+    <input type="text" class="form-control mb-4" placeholder="Email" formControlName="email" value="{{tempUser.email}}"
+      required />
+    <input type="text" class="form-control mb-4" placeholder="Contact" formControlName="contact"
+      value="{{tempUser.contact}}" required />
+    <div>
+      <div class="custom-control custom-radio custom-control-inline" *ngIf="tempUser.role != staff">
+        <input type="radio" class="custom-control-input" id="Staff" name="role" mdbInput value="Staff"
+          formControlName="role">
+        <label class="custom-control-label" for="Staff">Change role to Staff</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline" *ngIf="tempUser.role != student">
+        <input type="radio" class="custom-control-input" id="Student" name="role" mdbInput value="Student"
+          formControlName="role">
+        <label class="custom-control-label" for="Student">Change role to Student</label>
+      </div>
+    </div>
+    <button class="btn btn-info btn-block my-4" type="submit">Update</button>
+  </form>
+</div>
+<app-register *ngIf="add && !edit"></app-register>
+
+<div class="container my-5" *ngIf="addSubj && !edit && !add">
+  <form class="p-5" [formGroup]="subject" (submit)="save()">
+    <p class="h4 mb-4">Add Subject</p>
+    <p class="text-danger"> Once this information is entered it cannot be changed!!!</p>
+    <select class="browser-default custom-select mb-4" (change)="selecteCourse($event)">
+      <option selected disabled>Select Course</option>
+      <option *ngFor="let c of courses" value="{{c.id}}">{{c.name}}</option>
+    </select>
+
+    <div *ngIf="tempCourse">
+      <div class="row">
+        <div class="col-4">
+          <!-- Select  -->
+          Students subjects
+        </div>
+        <div class="col-6">
+          Predicate mark for subject
+        </div>
+        <div class="col-2">
+          Save
+        </div>
+      </div>
+      <hr>
+      <span *ngFor="let s of subjects">
+        <div class="row mb-2" *ngIf="tempCourse.id == s.courseId">
+          <div class="col-4">
+            <!-- <mdb-checkbox [default]="true"></mdb-checkbox> -->
+            {{s.code}} {{s.name}}
+          </div>
+          <div class="col-5">
+            <div class="slidecontainer">
+              <input type="range" min="0" max="100" class="slider" formControlName="predicate"
+                (change)="range($event, s)">
+            </div>
+          </div>
+          <div class="col-1">
+            {{s.temp}}
+          </div>
+          <div class="col-2" (click)="addSubject(s)">
+            <button class="btn btn-info btn-block my-4" type="button">Add</button>
+          </div>
+        </div>
+      </span>
+      <button class="btn btn-info btn-block" type="submit">Done</button>
+      <!--(click)="hideForm()"-->
+    </div>
+  </form>
+</div>

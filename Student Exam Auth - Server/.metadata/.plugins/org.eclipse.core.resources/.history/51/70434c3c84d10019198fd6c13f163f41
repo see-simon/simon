@@ -1,0 +1,8 @@
+package studentexamauth.backend.print;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PrintRepository extends JpaRepository<Print, Integer>{
+	Print findById(int id);
+	Print findByFingerPrint(String fingerPrint);
+}

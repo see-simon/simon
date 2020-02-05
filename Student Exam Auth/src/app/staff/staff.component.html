@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <h3 class="float-right">{{date | date: "fullDate"}}</h3>
+    <h3 class="mt-5 mb-4">Exams for Today</h3>
+
+    <div class="mt-4" *ngIf="exam.length > 0">
+        <button type="button" mdbBtn color="info" mdbWavesEffect routerLink="/student">My Exams</button>
+        <p class="text-danger">{{err}}</p>
+        <div class="form-inline md-form form-sm active-purple-2">
+            <input class="form-control form-control-sm mr-3 w-25" type="text" placeholder="Search student number"
+                aria-label="Search" mdbInput pattern="[0-9]+" maxlength="9" minlength="8" required name="studNo"
+                [(ngModel)]="studNo">
+            <i class="fas fa-search" aria-hidden="true" (click)="search(exam)"></i>
+        </div>
+        <table mdbTable>
+            <thead class="white-text" style="background-color: #33b5e5">
+                <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol *ngFor="let el of exam">
+                    <td>{{el.un}}</td>
+                    <td>{{el.u}}</td>
+                    <td>{{el.c}}</td>
+                    <td>{{el.s}}</td>
+                    <td>{{el.ed}}</td>
+                    <td>{{el.es}}</td>
+                    <td>{{el.eb}}</td>
+                    <td>{{el.er}}</td>
+                    <td>{{el.sn}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <h5>Number of students writing today: {{total}}</h5>
+        <h5>Number of first session subjects: {{first}}</h5>
+        <h5>Number of second session subjects: {{second}}</h5>
+        <div class="my-5 center">
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadCSV(exam)">Export to CSV</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadTXT(exam)">Export to Text
+                file</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadDOC(exam)">Export to Word</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadPDF(exam)">Export to PDF</button>
+        </div>
+    </div>
+    <div class="mt-4" *ngIf="exam.length == 0">
+        <h4 class="text-danger">No Exam details for today!</h4>
+    </div>
+</div>

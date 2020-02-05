@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <h3 class="float-right">{{date | date: "fullDate"}}</h3>
+  <h3 class="mb-4">Exams</h3>
+
+  Student Number: {{user.id}}
+  <br />
+  Name: {{user.name}}
+  <br />
+  Surname: {{user.surname}}
+  <br />
+  E-Mail: {{user.email}}
+  <br />
+  Contact: {{user.contact}}
+  <br />
+  Gender: {{user.gender}}
+  <br />
+  <span *ngIf="user.dateOfBirth">Date Of Birth: {{user.dateOfBirth}}</span>
+
+  <div class="float-right mb-3">
+    <button type="button" class="btn btn-warning" *ngIf="one && !all" (click)="allExams()">Show All</button>
+    <button type="button" class="btn btn-success" *ngIf="!one && all" (click)="userExams()">Show for Today</button>
+  </div>
+
+  <div class="mt-4" *ngIf="exams.length > 0 && !one && all">
+    <table mdbTable>
+      <thead class="white-text" style="background-color: #33b5e5">
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let el of exams">
+          <td *ngIf="el.un == user.id">{{el.un}}</td>
+          <td *ngIf="el.un == user.id">{{el.u}}</td>
+          <td *ngIf="el.un == user.id">{{el.s}}</td>
+          <td *ngIf="el.un == user.id">{{el.c}}</td>
+          <td *ngIf="el.un == user.id">{{el.ed}}</td>
+          <td *ngIf="el.un == user.id">{{el.es}}</td>
+          <td *ngIf="el.un == user.id">{{el.eb}}</td>
+          <td *ngIf="el.un == user.id">{{el.er}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="my-5 center">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadCSV(exams)">Export to CSV</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadTXT(exams)">Export to Text
+        file</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadDOC(exams)">Export to Word</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadPDF2(exams)">Export to PDF</button>
+    </div>
+  </div>
+  <!-- <div class="mt-4" *ngIf="exams.length == 0">
+    <h4 class="text-danger">No Exam details!</h4>
+  </div> -->
+
+  <div class="mt-4" *ngIf="exam.length > 0 && one && !all">
+    <table mdbTable>
+      <thead class="white-text" style="background-color: #33b5e5">
+        <tr>
+          <th *ngFor="let head of headElement" scope="col">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let el of exam">
+          <td *ngIf="el.un == user.id">{{el.un}}</td>
+          <td *ngIf="el.un == user.id">{{el.u}}</td>
+          <td *ngIf="el.un == user.id">{{el.s}}</td>
+          <td *ngIf="el.un == user.id">{{el.c}}</td>
+          <td *ngIf="el.un == user.id">{{el.ed}}</td>
+          <td *ngIf="el.un == user.id">{{el.es}}</td>
+          <td *ngIf="el.un == user.id">{{el.eb}}</td>
+          <td *ngIf="el.un == user.id">{{el.er}}</td>
+          <td *ngIf="el.un == user.id">{{el.sn}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="my-5 center">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadCSV(exam)">Export to CSV</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadTXT(exam)">Export to Text
+        file</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadDOC(exam)">Export to Word</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadPDF(exam)">Export to PDF</button>
+    </div>
+  </div>
+  <!-- <div class="mt-4" *ngIf="exam.length == 0">
+    <h4 class="text-danger">No Exam details for today!</h4>
+  </div> -->
+</div>

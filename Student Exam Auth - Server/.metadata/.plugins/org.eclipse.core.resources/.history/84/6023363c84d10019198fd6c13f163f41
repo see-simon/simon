@@ -1,0 +1,40 @@
+package studentexamauth.backend.print;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PrintService {
+	@Autowired
+	private PrintRepository printRepository;
+
+	public List<Print> readPrints() {
+		return printRepository.findAll();
+	}
+
+	public Print readPrint(int id) {
+		return printRepository.findById(id);
+	}
+
+	public Print findFingerPrint(String fingerPrint) {
+		return printRepository.findByFingerPrint(fingerPrint);
+	}
+	
+	public void createPrint(Print print) {
+		printRepository.save(print);
+	}
+
+	public void updatePrint(Print print) {
+		printRepository.saveAndFlush(print);
+	}
+
+	public void deletePrints() {
+		printRepository.deleteAll();
+	}
+
+	public void deletePrint(Print print) {
+		printRepository.delete(print);
+	}
+}

@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col"></div>
+    <form class="col text-center mt-5" [formGroup]="user" (submit)="register()">
+      <p class="h4 mb-4">Register</p>
+      <input type="text" class="form-control mb-4" placeholder="Student/Staff Number" formControlName="studNum"
+        pattern="[0-9]+" maxlength="9" minlength="8" required />
+      <input type="text" class="form-control mb-4" placeholder="Name" formControlName="name" pattern="[A-Za-z]+"
+        minlength="3" required />
+      <input type="text" class="form-control mb-4" placeholder="Surname" formControlName="surname" pattern="[A-Za-z]+"
+        minlength="3" required />
+      <input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+      <input type="text" class="form-control mb-4" placeholder="Contact Number" formControlName="contact"
+        pattern="[0-9]+" maxlength="10" minlength="10" required />
+      <select class="browser-default custom-select mb-4" formControlName="gender">
+        <option selected disabled>Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <input type="file" class="form-control mb-4" placeholder="Select Image" formControlName="image"
+        (change)="uploadFile($event)" accept="image/png, image/jpeg" required />
+      <button type="button" class="btn btn-warning" *ngIf="!scanned">Scan Finger</button>
+      <button type="button" class="btn btn-success" *ngIf="scanned">Finger Scaned</button>
+      <div class="mt-3 red-text">
+        <p *ngIf="err">{{err}}</p>
+        <p *ngIf="err1">{{err1}}</p>
+        <p *ngIf="err2">{{err2}}</p>
+        <p *ngIf="err3">{{err3}}</p>
+        <p *ngIf="err4">{{err4}}</p>
+        <p *ngIf="err5">{{err5}}</p>
+        <p *ngIf="err6">{{err6}}</p>
+      </div>
+      <button class="btn btn-info btn-block my-3" type="submit">Register</button>
+    </form>
+    <div class="col"></div>
+  </div>
+</div>

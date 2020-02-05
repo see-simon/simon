@@ -1,0 +1,124 @@
+<app-navbar></app-navbar>
+<p class="h2 mt-5 font-weight-light text-center">Subject</p>
+<div class="container my -5">
+    <span *ngIf="!updateSubj">
+        <div class="btn-group" role="group" aria-label="Basic example" *ngIf="!updateCour">
+            <button mdbBtn type="button" color="primary" class="waves-light" mdbWavesEffect
+                (click)="all(true)">All</button>
+            <button mdbBtn type="button" color="primary" class="waves-light" mdbWavesEffect
+                (click)="course(true)">Courses</button>
+            <button mdbBtn type="button" color="primary" class="waves-light" mdbWavesEffect
+                (click)="subject(true)">Subjects</button>
+        </div>
+    </span>
+    <!-- All Subjects and courses -->
+    <div *ngIf="allSub">
+        <div class="mt-4" *ngFor="let c of courses">
+            {{c.code}}: {{c.name}}
+            <table mdbTable>
+                <thead class="white-text" style="background-color: #33b5e5">
+                    <tr>
+                        <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mdbTableCol *ngFor="let s of subjects; let i = index">
+                        <td *ngIf="s.courseId == c.id">{{i+1}}</td>
+                        <td *ngIf="s.courseId == c.id">{{s.name}}</td>
+                        <td *ngIf="s.courseId == c.id">{{s.code}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- End of All Subjects and courses -->
+
+    <!-- Courses -->
+    <div *ngIf="cour && !updateCour" class="mt-4">
+        Courses
+        <br />
+        <button type="button" class="btn btn-success mb-4" (click)="registerCourse(true)">Add a Course</button>
+        <table mdbTable>
+            <thead class="white-text" style="background-color: #33b5e5">
+                <tr>
+                    <th *ngFor="let head of headElements2" scope="col">{{head}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol *ngFor="let s of courses; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{s.name}}</td>
+                    <td>{{s.code}}</td>
+                    <!-- <td>
+                        <mdb-checkbox [default]="true"></mdb-checkbox>
+                    </td> -->
+                    <td style="padding-top: 0;padding-bottom: 0;">
+                        <button type="button" class="btn btn-primary" (click)="updCourse(s)">Edit</button>
+                    </td>
+                    <td style="padding-top: 0;padding-bottom: 0;">
+                        <button type="button" class="btn btn-danger" (click)="rmvCourse(s)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h5 class="text-right" *ngIf="courses.length > 1">Total Courses: {{courses.length}}</h5>
+        <!-- <button type="button" class="btn btn-danger float-right">Delete All Courses</button> -->
+    </div>
+    <!-- End of Courses -->
+
+    <!-- Subjects -->
+    <div *ngIf="subj && !updateSubj" class="mt-4">
+        Subjects
+        <br />
+        <button type="button" class="btn btn-success mb-4" (click)="registerSubject(true)">Add a Subject</button>
+        <table mdbTable>
+            <thead class="white-text" style="background-color: #33b5e5">
+                <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    <th>Update </th>
+                    <th>Delete </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol *ngFor="let s of subjects; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{s.name}}</td>
+                    <td>{{s.code}}</td>
+                    <td style="padding-top: 0;padding-bottom: 0;">
+                        <button type="button" class="btn btn-primary" (click)="updSubject(s)">Edit</button>
+                    </td>
+                    <td style="padding-top: 0;padding-bottom: 0;">
+                        <button type="button" class="btn btn-danger" (click)="rmvSubject(s)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h5 class="text-right" *ngIf="subjects.length > 1">Total Subjects: {{subjects.length}}</h5>
+        <!-- <button type="button" class="btn btn-danger float-right">Delete All Subjects</button> -->
+    </div>
+    <!-- End of Subjects -->
+    <app-course *ngIf="regCourse"></app-course>
+    <app-add-subject *ngIf="regSubject"></app-add-subject>
+
+    <div *ngIf="updateSubj">
+        <form class="text-center" [formGroup]="subjectForm" (submit)="updateSubject()">
+            <p class="h2 mb-4">Update {{tempSubject.name}}</p>
+            <input type="text" class="form-control mb-4" placeholder="Name" formControlName="name"
+                value="{{tempSubject.name}}" required />
+            <input type="text" class="form-control mb-4" placeholder="Code" formControlName="code"
+                value="{{tempSubject.code}}" required />
+            <button class="btn btn-info btn-block my-4" type="submit">Update</button>
+        </form>
+    </div>
+
+    <div *ngIf="updateCour">
+        <form class="text-center" [formGroup]="courseForm" (submit)="updateCourse()">
+            <p class="h2 mb-4">Update {{tempCourse.name}}</p>
+            <input type="text" class="form-control mb-4" placeholder="Name" formControlName="name"
+                value="{{tempCourse.name}}" required />
+            <input type="text" class="form-control mb-4" placeholder="Code" formControlName="code"
+                value="{{tempCourse.code}}" required />
+            <button class="btn btn-info btn-block my-4" type="submit">Update</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<form (submit)="save()" [formGroup]="examDate">
+    <div class="row">
+        <div class="col-4">2019 {{semester}}
+            <br />
+            Exam Dates
+        </div>
+        <div class="col-8">
+            Enter Start Date
+            <input type="date" class="form-control mb-4" placeholder="Start Date" min="{{date}}" max="2019-12-31"
+                formControlName="startDate">
+        </div>
+        <!-- <div class="col">
+            Total number of exam days
+            <!-- <input type="date" class="form-control mb-4" placeholder="End Date" min="{{date}}" max="2019-12-31"
+                formControlName="endDate"> -->
+            <!-- <input type="number" class="form-control mb-4" min="14" max="30" formControlName="days">
+        </div> -->
+    </div>
+    <!-- <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            Total number of seats in exam venue: {{seats}}
+            <div class="slidecontainer">
+                <input type="range" min="500" max="1500" class="slider" formControlName="seats">
+            </div>
+        </div>
+        <div class="col">
+            Total number of rows in exam venue: {{rows}}
+            <div class="slidecontainer">
+                <input type="range" min="50" max="100" class="slider" formControlName="rows">
+            </div>
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <button mdbBtn type="submit" color="primary" block="true" mdbWavesEffect>Create timetable</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,93 @@
+<nav class="mb-1 navbar navbar-expand navbar-dark info-color">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home"> <i class="fas fa-fingerprint"></i> Exam Auth System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+      aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4" *ngIf="role == staff">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/staff" routerLinkActive="active">
+            <i class="fas fa-home"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+            <i class="fas fa-user"></i> Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/students" routerLinkActive="active">
+            <i class="fas fa-users"></i> Users
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/subject" routerLinkActive="active">
+            <i class="fas fa-diagnoses"></i> Subjects
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/exam" routerLinkActive="active">
+            <i class="fas fa-marker"></i> Exam
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/usersubject" routerLinkActive="active">
+            <i class="fas fa-newspaper"></i> Predicate
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mailto:name@email.com">
+            <i class="fas fa-envelope-open"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tel:0123456789">
+            <i class="fas fa-phone"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4" *ngIf="!role">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/signin">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/register">
+            <i class="fas fa-sign-in-alt"></i> Signup
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4" *ngIf="role == student">
+      <ul class="navbar-nav ml-auto">
+        <a class="nav-link" routerLink="/student" routerLinkActive="active">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <li class="nav-item">
+          <a class="nav-link " routerLink="/profile" routerLinkActive="active">
+            <i class="fas fa-user"></i> Profile
+          </a>
+        </li>
+        <li>
+          <a class="nav-link " (click)="logOut()" routerLinkActive="active">
+            <i class="fas fa-sign-in-alt"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h5 class="text-center" *ngIf="role">{{user.name}} {{user.surname}} </h5>

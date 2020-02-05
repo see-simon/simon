@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+    <app-dates *ngIf="exm"></app-dates>
+
+    <div *ngIf="!exm">
+        <p class="h2 font-weight-light text-center">Exam Timetable</p>
+        <div class="form-inline md-form form-sm active-purple-2 text-center">
+            <input class="form-control form-control-sm mr-3 w-25" type="date" mdbInput required name="exmDate"
+                [(ngModel)]="exmDate">
+            <i class="fas fa-search" aria-hidden="true" (click)="search(exam)"></i>
+        </div>
+        <p class="text-danger">{{err}}</p>
+        <table mdbTable>
+            <thead class="white-text" style="background-color: #33b5e5">
+                <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol *ngFor="let e of exam">
+                    <td>{{e.cCode}} {{e.cName}}</td>
+                    <td>{{e.sCode}} {{e.sName}}</td>
+                    <td>{{e.date}}</td>
+                    <td>{{e.session}}</td>
+                    <td>{{e.building}}</td>
+                    <td>{{e.room}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="my-5 center">
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadCSV(exam)">Export to CSV</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadTXT(exam)">Export to Text
+                file</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadDOC(exam)">Export to Word</button>
+            <button type="button" mdbBtn color="info" mdbWavesEffect (click)="downloadPDF(exam)">Export to PDF</button>
+        </div>
+    </div>
+</div>

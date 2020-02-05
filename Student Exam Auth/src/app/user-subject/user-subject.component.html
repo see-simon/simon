@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+
+  <strong>
+    <div class="row">
+      <div class="col-1">
+        Stud No.
+      </div>
+      <div class="col-2">
+        Full Name
+      </div>
+      <div class="col-3">
+        Course
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-5">
+            Subject Name
+          </div>
+          <div class="col-3">
+            Subject Code
+          </div>
+          <div class="col-4">
+            Predicate Mark
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </strong>
+
+  <div *ngFor="let u of users">
+    <div class="row" *ngIf="u.active">
+      <div class="col-1">
+        {{u.id}}
+      </div>
+      <div class="col-2">
+        {{u.name}} {{u.surname}}
+      </div>
+      <div class="col-3">
+        <span *ngFor="let uc of userCourses">
+          <span *ngIf="u.id == uc.userId">
+            <span *ngFor="let c of courses">
+              <span *ngIf="uc.courseId == c.id">
+                {{c.name}}
+              </span>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div class="col-6">
+        <span *ngFor="let us of userSubject">
+          <span *ngIf="us.userId == u.id">
+            <span *ngFor="let s of subjects">
+              <div class="row" *ngIf="s.id == us.subjectId">
+                <div class="col-5">
+                  {{s.name}}
+                </div>
+                <div class="col-3">
+                  {{s.code}}
+                </div>
+                <div class="col-1">
+                  {{us.predicate}}%
+                </div>
+                <div class="col-3 text-success" *ngIf="us.predicate > 44">
+                  Qualify!
+                </div>
+                <div class="col-3 text-danger" *ngIf="us.predicate < 45">
+                  Dont qualify!
+                </div>
+              </div>
+            </span>
+          </span>
+        </span>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>

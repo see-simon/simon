@@ -1,0 +1,56 @@
+package studentexamauth.backend.print;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@CrossOrigin()
+public class PrintController {
+	@Autowired
+	private PrintService printService;
+	
+	@GetMapping("/print")
+	public List<Print> readPrints() {
+		return printService.readPrints();
+	}
+
+	@GetMapping("/print/{id}")
+	public Print readPrint(@PathVariable int id) {
+		return printService.readPrint(id);
+	}
+
+	@GetMapping("/print/finger/{print}")
+	public Print findFingerPrint(@PathVariable String print) {
+		return printService.findFingerPrint(print);
+	}
+	
+	@PostMapping(value = "/print")
+	public void createPrint(@RequestBody Print print) {
+		printService.createPrint(print);
+	}
+
+	@PutMapping(value = "/print")
+	public void updatePrint(@RequestBody Print print) {
+		printService.updatePrint(print);
+	}
+
+	@DeleteMapping("/print")
+	public void deletePrints() {
+		printService.deletePrints();
+	}
+
+	@DeleteMapping("/print/{id}")
+	public void deletePrint(@PathVariable int id) {
+		Print print = printService.readPrint(id);
+		printService.deletePrint(print);
+	}
+}

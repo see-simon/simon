@@ -1,0 +1,5 @@
+package studentexamauth.backend.arduino;
+
+public class ArduinoRepository {
+
+}

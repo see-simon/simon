@@ -1,0 +1,144 @@
+package studentexamauth.backend.user;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+
+import java.sql.Date;
+
+@Entity
+public class User {
+	@Id
+	@Column(unique = true)
+	String id;
+	String name;
+	String surname;
+	String role;
+	Date dateOfBirth;
+	@Column(unique = true)
+	String fingerPrint;
+	String gender;
+	boolean active;
+	@Lob
+	byte[] photo;
+	Date regDate;
+String email;
+String contact;
+	public User() {
+		super();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getFingerPrint() {
+		return fingerPrint;
+	}
+
+	public void setFingerPrint(String fingerPrint) {
+		this.fingerPrint = fingerPrint;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public User(String id, String name, String surname, String role, Date dateOfBirth, String fingerPrint,
+			String gender, boolean active, byte[] photo, Date regDate,String email,	String contact) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.role = role;
+		this.dateOfBirth = dateOfBirth;
+		this.fingerPrint = fingerPrint;
+		this.gender = gender;
+		this.active = active;
+		this.photo = photo;
+		this.regDate=regDate;
+		this.email= email;
+this.contact= contact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+}
